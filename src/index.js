@@ -1,13 +1,38 @@
-"use strict";
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  return (
+    (_typeof =
+      "function" == typeof Symbol && "symbol" == typeof Symbol.iterator
+        ? function (obj) {
+            return typeof obj;
+          }
+        : function (obj) {
+            return obj &&
+              "function" == typeof Symbol &&
+              obj.constructor === Symbol &&
+              obj !== Symbol.prototype
+              ? "symbol"
+              : typeof obj;
+          }),
+    _typeof(obj)
+  );
+}
 
 var React = require("react");
+
 var PropTypes = require("prop-types");
 
 function _interopDefaultLegacy(e) {
-  return e && typeof e === "object" && "default" in e ? e : { default: e };
+  return e && _typeof(e) === "object" && "default" in e
+    ? e
+    : {
+        default: e,
+      };
 }
 
 var React__default = /*#__PURE__*/ _interopDefaultLegacy(React);
+
 var PropTypes__default = /*#__PURE__*/ _interopDefaultLegacy(PropTypes);
 
 function _classCallCheck(instance, Constructor) {
@@ -134,7 +159,7 @@ function _assertThisInitialized(self) {
 }
 
 function _possibleConstructorReturn(self, call) {
-  if (call && (typeof call === "object" || typeof call === "function")) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
   } else if (call !== void 0) {
     throw new TypeError(
@@ -174,7 +199,6 @@ var commonjsGlobal =
     : typeof self !== "undefined"
     ? self
     : {};
-
 /**
  * lodash (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
@@ -185,57 +209,60 @@ var commonjsGlobal =
  */
 
 /** Used as the `TypeError` message for "Functions" methods. */
+
 var FUNC_ERROR_TEXT = "Expected a function";
-
 /** Used as references for various `Number` constants. */
+
 var NAN = 0 / 0;
-
 /** `Object#toString` result references. */
+
 var symbolTag = "[object Symbol]";
-
 /** Used to match leading and trailing whitespace. */
+
 var reTrim = /^\s+|\s+$/g;
-
 /** Used to detect bad signed hexadecimal string values. */
+
 var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
-
 /** Used to detect binary string values. */
+
 var reIsBinary = /^0b[01]+$/i;
-
 /** Used to detect octal string values. */
+
 var reIsOctal = /^0o[0-7]+$/i;
-
 /** Built-in method references without a dependency on `root`. */
-var freeParseInt = parseInt;
 
+var freeParseInt = parseInt;
 /** Detect free variable `global` from Node.js. */
+
 var freeGlobal =
-  typeof commonjsGlobal == "object" &&
+  _typeof(commonjsGlobal) == "object" &&
   commonjsGlobal &&
   commonjsGlobal.Object === Object &&
   commonjsGlobal;
-
 /** Detect free variable `self`. */
+
 var freeSelf =
-  typeof self == "object" && self && self.Object === Object && self;
-
+  (typeof self === "undefined" ? "undefined" : _typeof(self)) == "object" &&
+  self &&
+  self.Object === Object &&
+  self;
 /** Used as a reference to the global object. */
+
 var root = freeGlobal || freeSelf || Function("return this")();
-
 /** Used for built-in method references. */
-var objectProto = Object.prototype;
 
+var objectProto = Object.prototype;
 /**
  * Used to resolve the
  * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
  * of values.
  */
-var objectToString = objectProto.toString;
 
+var objectToString = objectProto.toString;
 /* Built-in method references for those with the same name as other `lodash` methods. */
+
 var nativeMax = Math.max,
   nativeMin = Math.min;
-
 /**
  * Gets the timestamp of the number of milliseconds that have elapsed since
  * the Unix epoch (1 January 1970 00:00:00 UTC).
@@ -252,10 +279,10 @@ var nativeMax = Math.max,
  * }, _.now());
  * // => Logs the number of milliseconds it took for the deferred invocation.
  */
-var now = function () {
+
+var now = function now() {
   return root.Date.now();
 };
-
 /**
  * Creates a debounced function that delays invoking `func` until after `wait`
  * milliseconds have elapsed since the last time the debounced function was
@@ -310,6 +337,7 @@ var now = function () {
  * // Cancel the trailing debounced invocation.
  * jQuery(window).on('popstate', debounced.cancel);
  */
+
 function debounce(func, wait, options) {
   var lastArgs,
     lastThis,
@@ -325,7 +353,9 @@ function debounce(func, wait, options) {
   if (typeof func != "function") {
     throw new TypeError(FUNC_ERROR_TEXT);
   }
+
   wait = toNumber(wait) || 0;
+
   if (isObject(options)) {
     leading = !!options.leading;
     maxing = "maxWait" in options;
@@ -338,7 +368,6 @@ function debounce(func, wait, options) {
   function invokeFunc(time) {
     var args = lastArgs,
       thisArg = lastThis;
-
     lastArgs = lastThis = undefined;
     lastInvokeTime = time;
     result = func.apply(thisArg, args);
@@ -347,10 +376,10 @@ function debounce(func, wait, options) {
 
   function leadingEdge(time) {
     // Reset any `maxWait` timer.
-    lastInvokeTime = time;
-    // Start the timer for the trailing edge.
-    timerId = setTimeout(timerExpired, wait);
-    // Invoke the leading edge.
+    lastInvokeTime = time; // Start the timer for the trailing edge.
+
+    timerId = setTimeout(timerExpired, wait); // Invoke the leading edge.
+
     return leading ? invokeFunc(time) : result;
   }
 
@@ -358,17 +387,15 @@ function debounce(func, wait, options) {
     var timeSinceLastCall = time - lastCallTime,
       timeSinceLastInvoke = time - lastInvokeTime,
       result = wait - timeSinceLastCall;
-
     return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
   }
 
   function shouldInvoke(time) {
     var timeSinceLastCall = time - lastCallTime,
-      timeSinceLastInvoke = time - lastInvokeTime;
-
-    // Either this is the first call, activity has stopped and we're at the
+      timeSinceLastInvoke = time - lastInvokeTime; // Either this is the first call, activity has stopped and we're at the
     // trailing edge, the system time has gone backwards and we're treating
     // it as the trailing edge, or we've hit the `maxWait` limit.
+
     return (
       lastCallTime === undefined ||
       timeSinceLastCall >= wait ||
@@ -379,21 +406,22 @@ function debounce(func, wait, options) {
 
   function timerExpired() {
     var time = now();
+
     if (shouldInvoke(time)) {
       return trailingEdge(time);
-    }
-    // Restart the timer.
+    } // Restart the timer.
+
     timerId = setTimeout(timerExpired, remainingWait(time));
   }
 
   function trailingEdge(time) {
-    timerId = undefined;
-
-    // Only invoke if we have `lastArgs` which means `func` has been
+    timerId = undefined; // Only invoke if we have `lastArgs` which means `func` has been
     // debounced at least once.
+
     if (trailing && lastArgs) {
       return invokeFunc(time);
     }
+
     lastArgs = lastThis = undefined;
     return result;
   }
@@ -402,6 +430,7 @@ function debounce(func, wait, options) {
     if (timerId !== undefined) {
       clearTimeout(timerId);
     }
+
     lastInvokeTime = 0;
     lastArgs = lastCallTime = lastThis = timerId = undefined;
   }
@@ -413,7 +442,6 @@ function debounce(func, wait, options) {
   function debounced() {
     var time = now(),
       isInvoking = shouldInvoke(time);
-
     lastArgs = arguments;
     lastThis = this;
     lastCallTime = time;
@@ -422,22 +450,25 @@ function debounce(func, wait, options) {
       if (timerId === undefined) {
         return leadingEdge(lastCallTime);
       }
+
       if (maxing) {
         // Handle invocations in a tight loop.
         timerId = setTimeout(timerExpired, wait);
         return invokeFunc(lastCallTime);
       }
     }
+
     if (timerId === undefined) {
       timerId = setTimeout(timerExpired, wait);
     }
+
     return result;
   }
+
   debounced.cancel = cancel;
   debounced.flush = flush;
   return debounced;
 }
-
 /**
  * Checks if `value` is the
  * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
@@ -463,11 +494,12 @@ function debounce(func, wait, options) {
  * _.isObject(null);
  * // => false
  */
+
 function isObject(value) {
-  var type = typeof value;
+  var type = _typeof(value);
+
   return !!value && (type == "object" || type == "function");
 }
-
 /**
  * Checks if `value` is object-like. A value is object-like if it's not `null`
  * and has a `typeof` result of "object".
@@ -492,10 +524,10 @@ function isObject(value) {
  * _.isObjectLike(null);
  * // => false
  */
-function isObjectLike(value) {
-  return !!value && typeof value == "object";
-}
 
+function isObjectLike(value) {
+  return !!value && _typeof(value) == "object";
+}
 /**
  * Checks if `value` is classified as a `Symbol` primitive or object.
  *
@@ -513,13 +545,13 @@ function isObjectLike(value) {
  * _.isSymbol('abc');
  * // => false
  */
+
 function isSymbol(value) {
   return (
-    typeof value == "symbol" ||
+    _typeof(value) == "symbol" ||
     (isObjectLike(value) && objectToString.call(value) == symbolTag)
   );
 }
-
 /**
  * Converts `value` to a number.
  *
@@ -543,20 +575,25 @@ function isSymbol(value) {
  * _.toNumber('3.2');
  * // => 3.2
  */
+
 function toNumber(value) {
   if (typeof value == "number") {
     return value;
   }
+
   if (isSymbol(value)) {
     return NAN;
   }
+
   if (isObject(value)) {
     var other = typeof value.valueOf == "function" ? value.valueOf() : value;
     value = isObject(other) ? other + "" : other;
   }
+
   if (typeof value != "string") {
     return value === 0 ? value : +value;
   }
+
   value = value.replace(reTrim, "");
   var isBinary = reIsBinary.test(value);
   return isBinary || reIsOctal.test(value)
@@ -613,7 +650,6 @@ var styles = {
   userGuideMessagesouth: "styles_userGuideMessagesouth__G2MtA",
 };
 styleInject(css_248z);
-
 var win = window;
 
 var createElement = function createElement(type) {
@@ -717,6 +753,7 @@ var HelpText = /*#__PURE__*/ (function (_Component) {
           nextText = _this$props.nextText,
           skipText = _this$props.skipText,
           finishText = _this$props.finishText;
+        onNextCallback = _this$props.onNextCallback;
         var node = createElement(
           "span",
           "userGuide--message "
@@ -735,7 +772,13 @@ var HelpText = /*#__PURE__*/ (function (_Component) {
           isLast ? "finish" : "next",
           isLast ? finishText : nextText
         );
-        nextButton.addEventListener("click", onNext);
+        nextButton.addEventListener("click", () => {
+          if (typeof onNextCallback === "function") {
+            onNextCallback();
+          }
+          onNext();
+        });
+
         node.appendChild(titleEl);
         node.appendChild(messageEl);
 
@@ -1014,6 +1057,7 @@ var UserGuide = /*#__PURE__*/ (function (_Component2) {
           guides = _this$props4.guides,
           title = _this$props4.title,
           content = _this$props4.content;
+        firstCallback = _this$props4.firstCallback;
         var _this$state = this.state,
           helpIndex = _this$state.helpIndex,
           acceptedConfirm = _this$state.acceptedConfirm;
@@ -1048,12 +1092,16 @@ var UserGuide = /*#__PURE__*/ (function (_Component2) {
                 ),
                 /*#__PURE__*/ React.createElement(
                   "div",
-                  { className: "user-guide-modal-content" },
+                  {
+                    className: "user-guide-modal-content",
+                  },
                   content
                 ),
                 /*#__PURE__*/ React__default["default"].createElement(
                   "div",
-                  { className: "user-guide-modal-button" },
+                  {
+                    className: "user-guide-modal-button",
+                  },
                   /*#__PURE__*/ React__default["default"].createElement(
                     "button",
                     {
@@ -1064,7 +1112,10 @@ var UserGuide = /*#__PURE__*/ (function (_Component2) {
                   /*#__PURE__*/ React__default["default"].createElement(
                     "button",
                     {
-                      onClick: this.acceptConfirm,
+                      onClick: () => {
+                        firstCallback();
+                        this.acceptConfirm();
+                      },
                     },
                     this.getYesText()
                   )
@@ -1122,4 +1173,4 @@ _defineProperty(UserGuide, "defaultProps", {
 });
 
 module.exports = UserGuide;
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=index.es.js.map
