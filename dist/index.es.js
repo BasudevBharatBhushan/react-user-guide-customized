@@ -1100,6 +1100,9 @@ var UserGuide = /*#__PURE__*/ (function (_Component2) {
         firstSkipCallback = _this$props4.firstSkipCallback;
         userGuidingState = _this$props4.userGuidingState;
         specificHelpIndex = _this$props4.specificHelpIndex;
+        userGuideModalAcceptButtonRef =
+          _this$props4.userGuideModalAcceptButtonRef;
+        userGuideModalSkipButtonRef = _this$props4.userGuideModalSkipButtonRef;
         var _this$state = this.state,
           helpIndex = _this$state.helpIndex,
           acceptedConfirm = _this$state.acceptedConfirm;
@@ -1158,6 +1161,7 @@ var UserGuide = /*#__PURE__*/ (function (_Component2) {
                       onClick: () => {
                         firstSkipCallback();
                       },
+                      ref: userGuideModalSkipButtonRef,
                     },
                     this.getNoText()
                   ),
@@ -1168,6 +1172,7 @@ var UserGuide = /*#__PURE__*/ (function (_Component2) {
                         firstCallback();
                         this.acceptConfirm();
                       },
+                      ref: userGuideModalAcceptButtonRef,
                     },
 
                     this.getYesText()
